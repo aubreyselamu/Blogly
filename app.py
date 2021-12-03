@@ -27,7 +27,7 @@ def show_users():
     return render_template('users/index.html', users=users)
 
 @app.route('/users/new', methods = ["GET"])
-def add_user():
+def add_user_get():
     '''Show an add form for users'''
 
     return render_template('users/new.html')
