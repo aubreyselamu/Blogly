@@ -13,11 +13,11 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 db.create_all()
 
-# @app.route('/')
-# def list_users():
-#     """Redirect: List pets and show add form."""
+@app.route('/')
+def root():
+    """Homepage redirects to list of users."""
 
-#     return render_template('base.html')
+    return redirect("/users")
 
 @app.route('/users')
 def show_users():
@@ -46,5 +46,45 @@ def add_user():
     db.session.commit()
 
     return redirect('/users')
+
+@app.route('/users/<int:user_id>')
+def show_user(user_id):
+    '''Show a page info with a specific user'''
+
+    user = User.query.get_or_404(user_id)
+    return render_template('users/show.html', user=user)
+
+@app.route('/users/<int:user_id>/edit', methods=["GET"])
+def show_edit(user_id):
+    '''Show edit page for user'''
+
+    user = User.query.get_or_404(user_id)
+    return render_template('users/edit.html', user=user)
+
+@app.route('/users/<int:user_id>/edit', methods=["POST"])
+def process_edit(user_id):
+    '''Process the edit form and return the user back to the /users page'''
+
+    user = User.query.get_or_404(user_id)
+    
+    user.first_name = request.form["first_name"]
+    user.last_name = request.form["last_name"]
+    user.image_url = request.form["image_url"] 
+
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect('/users')
+
+@app.route('/users/<int:user_id>/delete', methods=["POST"])
+def delete_user(user_id):
+    '''Delete user'''
+
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect('/users')
+
 
 
