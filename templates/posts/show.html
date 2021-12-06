@@ -1,4 +1,24 @@
-<!-- {% extends 'base.html' %}
-{% block title %}Show Post{% endblock %}
+{% extends 'base.html' %}
+{% block title %}{{post.title}}{% endblock %}
 
-{% block content %} -->
+{% block content %}
+
+<h1>{{posts.title}}</h1>
+<p>{{posts.content}}</p>
+<p>
+    <i>By {{posts.user.first_name}} {{posts.user.last_name}} on {{post.friendly_date}}</i>
+</p>
+<form>
+    <button class="btn btn-outline-primary"
+            formaction="/user/{{posts.user_id}}"
+            formmethod="GET">Cancel</button>
+    <button class="btn-btn-primary"
+            formaction="/posts/{{posts.id}}/edit"
+            formmethod="GET">Edit</button>
+    <button class=""
+            formaction="/posts/{{posts.id}}/delete"
+            formmethod="POST">Delete</button>
+
+</form>
+
+{% endblock %}
