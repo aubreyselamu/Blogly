@@ -108,7 +108,7 @@ def process_post(user_id):
     db.session.add(new_post)
     db.session.commit()
 
-    flash(f'Post {new_post.title} added.')
+    # flash(f'Post {new_post.title} added.')
 
     return redirect(f'/users/{user_id}')
 
@@ -117,9 +117,40 @@ def show_post(post_id):
     '''Show a post'''
 
     post = Post.query.get_or_404(post_id)
-    return render_template('show.html', post=post)
+    return render_template('posts/show.html', post=post)
 
+@app.route('/posts/<int:post_id>/edit')
+def edit_post(post_id):
+    '''Show form to edit post'''
 
+    post = Post.query.get_or_404(post_id)
+    return render_template('posts/edit.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=['POST'])
+def handle_edit_post(post_id):
+    '''Handle editing a post, redirect back to post view'''
+
+    post = Post.query.get_or_404(post_id)
+
+    post.title = request.form["title"]
+    post.content = request.form["content"]
+
+    db.session.add(post)
+    db.commit()
+
+    return redirect(f'/users/{post.user_id}')
+
+@app.route('/posts/<int:post_id>/delete', methods = ["POST"])
+def delete_post(post_id):
+    '''Delete post'''
+
+    post = Post.query.get_or_404(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(f'/users/{post.user_id}')
+  
 
 
 
