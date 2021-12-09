@@ -8,6 +8,16 @@
 <p>
     <i>By {{post.user.first_name}} {{post.user.last_name}} on {{post.friendly_date}}</i>
 </p>
+
+
+<p>
+  <b>Tags:</b>
+  {% for tag in post.tags %}
+  <a href="/tags/{{ tag.id }}"><i class="badge badge-primary">{{ tag.name }}</i></a>
+  {% endfor %}
+</p>
+
+
 <form>
     <button class="btn btn-outline-primary"
             formaction="/users/{{ post.user_id }}"
@@ -18,7 +28,6 @@
     <button class="btn btn-danger"
             formaction="/posts/{{ post.id }}/delete"
             formmethod="POST">Delete</button>
-
 </form>
 
 {% endblock %}
