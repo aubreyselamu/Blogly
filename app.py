@@ -94,7 +94,8 @@ def post_form(user_id):
     '''Show form to add post for that user'''
 
     user = User.query.get_or_404(user_id)
-    return render_template('posts/new.html', user=user)
+    tags = Tag.query.all()
+    return render_template('posts/new.html', user=user, tags=tags)
 
 @app.route('/users/<int:user_id>/posts/new', methods = ["POST"])
 def process_post(user_id):
@@ -108,8 +109,6 @@ def process_post(user_id):
     db.session.add(new_post)
     db.session.commit()
 
-    # flash(f'Post {new_post.title} added.')
-
     return redirect(f'/users/{user_id}')
 
 @app.route('/posts/<int:post_id>')
@@ -117,14 +116,16 @@ def show_post(post_id):
     '''Show a post'''
 
     post = Post.query.get_or_404(post_id)
+  
     return render_template('posts/show.html', post=post)
 
 @app.route('/posts/<int:post_id>/edit')
 def edit_post(post_id):
     '''Show form to edit post'''
-
+    
     post = Post.query.get_or_404(post_id)
-    return render_template('posts/edit.html', post=post)
+    tags = Tag.query.all()
+    return render_template('posts/edit.html', post=post, tags=tags)
 
 @app.route('/posts/<int:post_id>/edit', methods=['POST'])
 def handle_edit_post(post_id):
@@ -136,7 +137,7 @@ def handle_edit_post(post_id):
     post.content = request.form["content"]
 
     db.session.add(post)
-    db.commit()
+    db.session.commit()
 
     return redirect(f'/users/{post.user_id}')
 
@@ -196,7 +197,23 @@ def delete_tag(tag_id):
 
     return redirect('/tags')
 
+@app.route('/tags/<int:tag_id>/edit')
+def edit_tag(tag_id):
+    '''Show edit form for a tag'''
+    
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('/tags/edit.html', tag=tag)
 
+@app.route('/tags/<int:tag_id>/edit', methods = ["POST"])
+def process_edit_form(tag_id):
+    '''Process edit tag form'''
+    
+    tag = Tag.query.get_or_404(tag_id)
+    tag.name = request.form["name"]
+    db.session.add(tag)
+    db.session.commit()
+
+    return redirect('/tags')
 
 
 
