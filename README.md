@@ -5,6 +5,9 @@ A blogging application that allows users to create posts, update posts and add n
 - Front-end: HTML, Bootstrap, Jinja
 - Back-end: Python, Flask, SQLAlchemy, PostgreSQL
 
+## Testing
+All routes in this application are 100% tested. More testing to come involving models
+
 ## Screenshots of Key Pages in Application
 ### Homepage
 
