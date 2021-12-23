@@ -8,3 +8,7 @@ A blogging application that allows users to create posts, update posts and add n
 
 ![Screenshot1](https://i.imgur.com/4UjswSL.png)
 
+### User Detail Page
+
+![Screenshot2](https://i.imgur.com/jKCHXNc.png)
+
