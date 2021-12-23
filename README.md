@@ -3,7 +3,7 @@ A blogging application that allows users to create posts, update posts and add n
 
 ## Technologies
 
-## Screenshots
+## Screenshots of Key Pages in Application
 ### Homepage
 
 ![Screenshot1](https://i.imgur.com/4UjswSL.png)
@@ -11,4 +11,9 @@ A blogging application that allows users to create posts, update posts and add n
 ### User Detail Page
 
 ![Screenshot2](https://i.imgur.com/jKCHXNc.png)
+
+### Post Detail Page
+
+![Screenshot3](https://i.imgur.com/zgI9y7I.png)
+
 
