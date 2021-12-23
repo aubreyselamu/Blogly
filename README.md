@@ -2,8 +2,8 @@
 A blogging application that allows users to create posts, update posts and add new users
 
 ## Technologies
--- Front-end: HTML, Bootstrap, Jinja
--- Back-end: Python, Flask, SQLAlchemy, PostgreSQL
+- Front-end: HTML, Bootstrap, Jinja
+- Back-end: Python, Flask, SQLAlchemy, PostgreSQL
 
 ## Screenshots of Key Pages in Application
 ### Homepage
